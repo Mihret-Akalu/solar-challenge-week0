@@ -25,7 +25,7 @@
 ## Setup Instructions
 1. Clone the repository:
  ```bash
-   git clone https://github.com/yourusername/solar-challenge-week0.git
+   git clone https://github.com/Mihret-Akalu/solar-challenge-week0.git
    cd solar-challenge-week0
 
 2. how to all text markdown in vscode
