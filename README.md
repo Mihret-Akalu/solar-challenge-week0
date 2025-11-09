@@ -4,23 +4,24 @@
 
 ## Project Structure
 
- ├── .vscode/
- │   └── settings.json
- ├── .github/
- │   └── workflows/
- │       └── ci.yml
- ├── .gitignore
- ├── requirements.txt
- ├── README.md
- ├── src/
- ├── notebooks/
- │   ├── __init__.py
- │   └── README.md
- ├── tests/
- │   └── __init__.py
- └── scripts/
-     ├── __init__.py
-     └── README.md
+├── .vscode/
+│   └── settings.json
+├── .github/
+│   └── workflows
+│       ├── unittests.yml
+├── .gitignore
+├── requirements.txt
+├── README.md
+ |------ src/
+├── notebooks/
+│   ├── __init__.py
+│   └── README.md
+├── tests/
+│   ├── __init__.py
+└── scripts/
+    ├── __init__.py
+    └── README.md
+
 
 ## Setup Instructions
 1. Clone the repository:
