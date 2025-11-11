@@ -25,4 +25,4 @@ jobs:
         
     - name: Test basic functionality
       run: |
-        python -c \"import pandas as pd; import numpy as np; print('✅ All imports successful')\"
+        python -c "import pandas as pd; import numpy as np; print('All imports successful')"
