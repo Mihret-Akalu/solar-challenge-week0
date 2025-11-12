@@ -1,4 +1,6 @@
-﻿name: CI
+# Fix the missing closing quote and parenthesis
+@"
+name: CI
 
 on:
   push:
@@ -43,3 +45,8 @@ except ImportError:
 '
 
         echo '🎉 Dashboard environment ready!'
+"@ | Out-File -FilePath .github/workflows/ci.yml -Encoding UTF8
+
+git add .github/workflows/ci.yml
+git commit -m "fix: correct syntax error in CI workflow - missing closing quote"
+git push origin dashboard-dev
