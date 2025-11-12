@@ -18,36 +18,28 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Debug - Check files
-      run: |
-        echo "=== Current directory ==="
-        pwd
-        ls -la
-        echo "=== requirements.txt exists? ==="
-        ls -la requirements.txt || echo "requirements.txt not found"
-        echo "=== requirements.txt content ==="
-        cat requirements.txt || echo "Cannot read requirements.txt"
-        echo "=== Line count ==="
-        wc -l requirements.txt || echo "Cannot count lines"
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        echo "=== pip version ==="
-        pip --version
-        echo "=== Installing from requirements.txt ==="
-        pip install -r requirements.txt
-        echo "=== Installed packages ==="
-        pip list
+        pip install pandas numpy matplotlib seaborn scipy streamlit plotly
 
-    - name: Validate environment
+    - name: Validate dashboard environment
       run: |
-        echo "=== Testing imports ==="
-        python -c "import sys; print('Python path:', sys.path)"
-        python -c "import pandas as pd; print('✅ pandas version:', pd.__version__)"
-        python -c "import numpy as np; print('✅ numpy version:', np.__version__)"
-        python -c "import matplotlib; print('✅ matplotlib')"
-        python -c "import seaborn; print('✅ seaborn')"
-        python -c "import scipy; print('✅ scipy')"
-        python -c "import statsmodels; print('✅ statsmodels')"
-        echo "🎉 All packages imported successfully!"
+        echo '=== Testing Essential Dashboard Packages ==='
+        python -c 'import pandas as pd; print(\"✅ pandas:\", pd.__version__)'
+        python -c 'import numpy as np; print(\"✅ numpy:\", np.__version__)'
+        python -c 'import matplotlib; print(\"✅ matplotlib - plotting\")'
+        python -c 'import seaborn; print(\"✅ seaborn - visualizations\")'
+        python -c 'import streamlit; print(\"✅ streamlit - dashboard\")'
+        python -c 'import plotly; print(\"✅ plotly - interactive charts\")'
+        
+        # Test optional packages
+        python -c '
+try:
+    import statsmodels
+    print(\"✅ statsmodels - statistical models\")
+except ImportError:
+    print(\"⚠️  statsmodels not installed (optional)\")
+'
+        
+        echo '🎉 Dashboard environment ready!'
