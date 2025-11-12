@@ -32,7 +32,7 @@ jobs:
         python -c 'import seaborn; print(\"✅ seaborn - visualizations\")'
         python -c 'import streamlit; print(\"✅ streamlit - dashboard\")'
         python -c 'import plotly; print(\"✅ plotly - interactive charts\")'
-        
+
         # Test optional packages
         python -c '
 try:
@@ -41,5 +41,5 @@ try:
 except ImportError:
     print(\"⚠️  statsmodels not installed (optional)\")
 '
-        
+
         echo '🎉 Dashboard environment ready!'
