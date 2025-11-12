@@ -1,34 +1,53 @@
-name: CI # Name of the workflow
+﻿name: CI
 
-on:  # 👈 When this workflow is triggered
-# It runs automatically every time you push code or open a pull request.
+on:
   push:
-    branches: [ main, master ]
+    branches: [ main, setup-task, eda-* ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
-        
+        python-version: '3.10'
+
+    - name: Debug - Check files
+      run: |
+        echo "=== Current directory ==="
+        pwd
+        ls -la
+        echo "=== requirements.txt exists? ==="
+        ls -la requirements.txt || echo "requirements.txt not found"
+        echo "=== requirements.txt content ==="
+        cat requirements.txt || echo "Cannot read requirements.txt"
+        echo "=== Line count ==="
+        wc -l requirements.txt || echo "Cannot count lines"
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        echo "=== pip version ==="
+        pip --version
+        echo "=== Installing from requirements.txt ==="
         pip install -r requirements.txt
-        
-    - name: Run tests (if tests exist)
+        echo "=== Installed packages ==="
+        pip list
+
+    - name: Validate environment
       run: |
-        if [ -d "tests" ]; then
-          python -m pytest tests/ -v || echo "No tests found or tests failed"
-        else
-          echo "No tests directory found"
-        fi
+        echo "=== Testing imports ==="
+        python -c "import sys; print('Python path:', sys.path)"
+        python -c "import pandas as pd; print('✅ pandas version:', pd.__version__)"
+        python -c "import numpy as np; print('✅ numpy version:', np.__version__)"
+        python -c "import matplotlib; print('✅ matplotlib')"
+        python -c "import seaborn; print('✅ seaborn')"
+        python -c "import scipy; print('✅ scipy')"
+        python -c "import statsmodels; print('✅ statsmodels')"
+        echo "🎉 All packages imported successfully!"

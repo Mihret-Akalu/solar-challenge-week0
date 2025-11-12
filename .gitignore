@@ -7,6 +7,4 @@ __pycache__/
 env/
 pip-log.txt
 .DS_Store
-
 data/
-
